@@ -1,0 +1,212 @@
+body {
+  background: #1a1a1a;
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+}
+
+.background-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(39,1,1,0.3);
+  //background-color: rgba(10, 10, 100, 0.3);
+  //background-color: #003D4C;
+  //background-color: teal;
+  z-index: -1; // Moves to background. Does this work everywhere?
+  &:before {
+    // Gradient at top of background.
+    content: "";
+    display: inline-block;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 500px; // Height of the gradient
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      transparent 100%
+    );
+  }
+  .blurParallaxBg__blur {
+    position: fixed;
+    top: 200px;
+    right: -50px; // Same size as blur filter.
+    bottom: 0;
+    left: -50px; // Same size as blur filter.
+    background-image: url(http://zolton.org/img/bg-fallout76.jpg);
+    //background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    filter: blur(80px);
+    opacity: 0.5;
+  }
+  .blurParallaxBg__image__edge {
+    display: none;
+  }
+  .blurParallaxBg__image {
+    // position, left, and transform center the image
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    // Doesn't matter if using the Javascript scroll to fade.
+    // opacity: 0.8; // Makes background image slightly transparent
+    z-index: 1;
+    max-height: 680px; // Same height as the background image
+  }
+  .blurParallaxBg__image-clip {
+    // Masks the bottom part of the background image with a gradient.
+    -webkit-mask-image: linear-gradient(180deg, black 9%, transparent 80%);
+    mask-image: linear-gradient(180deg, black 9%, transparent 80%);
+    height: 680px; // Same height as the background image
+  }
+  .shape {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    //margin-top: -220px; // Brush
+    margin-top: -200px;
+    margin-left: -150px;
+    width: 300px;
+    height: 300px;
+
+    /* Does not work in Edge
+    background-color: rgba(215,145,8,1.0);
+    -webkit-mask-image: url(http://zolton.org/img/brush-black.png);
+    mask-image: url(http://zolton.org/img/brush-black.png);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    */
+
+    /* Works in Edge. */
+    background-color: transparent; 
+    background-image: url(http://zolton.org/img/fallout76-color-overlay.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    opacity: 0.65;
+  }
+  // Edge Only
+  @supports (-ms-ime-align: auto) {
+    .blurParallaxBg__image {
+      display: none;
+    }
+    .blurParallaxBg__image__edge {
+      display: block;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      max-height: 680px;
+      opacity: 0.45;
+    }
+    /* Moved this code to general .shape above.
+    .shape {
+      background-color: transparent; 
+      background-image: url(http://zolton.org/img/brush-bfa-horde-edge.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      opacity: 0.65;
+    }
+    */
+  }
+}
+
+.layout {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  color: white;
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &__header {
+    max-width: 60%;
+    margin-bottom: 80px;
+    font-family: "Hammersmith One", sans-serif;
+    font-style: normal;
+    text-shadow: 0 0 1px transparent, 0 1px 8px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    h1 {
+      font-weight: 100;
+      font-size: 3rem;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
+    }
+    h2 {
+      color: white;
+      opacity: 0.7;
+      font-weight: 100;
+      font-size: 1.2rem;
+      font-style: italic;
+      //margin: 0;
+      //padding: 0;
+      //line-height: 1.4em;
+    }
+  }
+  &__navigation__home {
+    text-align: center;
+    position: absolute;
+    bottom: 4%;
+    a {
+      display: inline-block;
+      color: #ccc;
+      text-decoration: none;
+      &:hover {
+        color: white;
+      }
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li {
+        display: inline-block;
+        padding: 6px 12px;
+      }
+    }
+  }
+  &__navigation {
+    position: absolute;
+    bottom: 10%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      li {
+        display: inline-block;
+        padding: 16px 32px;
+        a {
+          color: #ccc;
+          text-decoration: none;
+          text-transform: uppercase;
+          &:hover {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  &__content {
+    display: none;
+    background-color: rgba(0, 0, 255, 0.3);
+    font-size: 1.4rem;
+    font-weight: 100;
+    font-style: normal;
+    text-rendering: optimizeLegibility;
+    line-height: 1.8rem;
+  }
+}
