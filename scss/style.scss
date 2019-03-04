@@ -1,6 +1,24 @@
+/* Breakpoints */
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
+
 body {
   background: #1a1a1a;
-  font-family: "Montserrat", sans-serif;
+  // font-family: "Montserrat", sans-serif;
+  font-family: 'Roboto', sans-serif;
   margin: 0;
 }
 
@@ -14,13 +32,14 @@ body {
   //background-color: rgba(10, 10, 100, 0.3);
   //background-color: #003D4C;
   //background-color: teal;
+  //background-color: #642c1d;
   z-index: -1; // Moves to background. Does this work everywhere?
   &:before {
     // Gradient at top of background.
     content: "";
     display: inline-block;
     position: absolute;
-    z-index: 1;
+    z-index: 1; 
     width: 100%;
     height: 500px; // Height of the gradient
     background: linear-gradient(
@@ -35,7 +54,6 @@ body {
     right: -50px; // Same size as blur filter.
     bottom: 0;
     left: -50px; // Same size as blur filter.
-    background-image: url(http://zolton.org/img/bg-fallout76.jpg);
     //background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
@@ -61,14 +79,16 @@ body {
     -webkit-mask-image: linear-gradient(180deg, black 9%, transparent 80%);
     mask-image: linear-gradient(180deg, black 9%, transparent 80%);
     height: 680px; // Same height as the background image
+    //height: 100vh;
   }
   .shape {
+    display: none;
     content: "";
     position: absolute;
     top: 50%;
     left: 50%;
     //margin-top: -220px; // Brush
-    margin-top: -200px;
+    margin-top: -212px;
     margin-left: -150px;
     width: 300px;
     height: 300px;
@@ -85,12 +105,13 @@ body {
 
     /* Works in Edge. */
     background-color: transparent; 
-    background-image: url(http://zolton.org/img/fallout76-color-overlay.png);
+    background-image: url('../img/brush-white.png');
     background-size: contain;
     background-repeat: no-repeat;
     
     opacity: 0.65;
   }
+
   // Edge Only
   @supports (-ms-ime-align: auto) {
     .blurParallaxBg__image {
@@ -132,15 +153,46 @@ body {
   justify-content: center;
   align-items: center;
   &__header {
-    max-width: 60%;
+    max-width: 50%;
     margin-bottom: 80px;
-    font-family: "Hammersmith One", sans-serif;
+    // margin-bottom: 0px;
+    font-family: 'Playfair Display', serif;
     font-style: normal;
     text-shadow: 0 0 1px transparent, 0 1px 8px rgba(0, 0, 0, 0.8);
     text-align: center;
+    &__avatar {
+      content: "";
+      /* position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -305px;
+      margin-left: -100px; */
+      margin: 0.67em auto;
+      width: 180px;
+      height: 180px;
+      background-color: transparent;
+      background-image: url(../img/wow-pepe.jpg);
+      background-size: contain;
+      background-repeat: no-repeat;
+      border-radius: 200px;
+      z-index: 100;
+      box-shadow: 0px 0px 40px rgba(155,155,155,0.5);
+    }
+    hr {
+      border: 0;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 64%);
+      height: 20px;
+      width: 50%;
+      background-position-x: center;
+      background-position-y: -10px;
+      background-repeat: no-repeat;
+      background-size: auto;
+      border-top: 1px solid rgba(255,255,255,.055);
+      margin-bottom: -10px;
+    }
     h1 {
       font-weight: 100;
-      font-size: 3rem;
+      font-size: 4.6rem;
       font-style: normal;
       margin: 0;
       padding: 0;
@@ -148,8 +200,10 @@ body {
     h2 {
       color: white;
       opacity: 0.7;
+      font-family: 'Roboto', sans-serif;
       font-weight: 100;
       font-size: 1.2rem;
+      line-height: 1.4em;
       font-style: italic;
       //margin: 0;
       //padding: 0;
@@ -210,3 +264,94 @@ body {
     line-height: 1.8rem;
   }
 }
+
+/* Medium */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+  .layout {
+    //border: 10px solid red;
+    &__header {
+      max-width: 70%;
+      &__avatar {
+        width: 160px;
+        height: 160px;
+        box-shadow: 0px 0px 20px rgba(155,155,155,.5);
+      }
+      hr {
+      }
+      h1 {
+        font-size: 3rem;
+      }
+      h2 {
+        font-size: 1.0rem;
+      }
+    }
+    &__navigation__home {
+      a {
+        &:hover {
+        }
+      }
+      ul {
+        li {
+        }
+      }
+    }
+    &__navigation {
+      ul {
+        li {
+          a {
+            &:hover {
+            }
+          }
+        }
+      }
+    }
+    &__content {
+    }
+  }
+}
+
+/* Small */
+@media screen and (max-width: 39.9375em) {
+  .layout {
+    //border: 10px solid purple;
+    &__header {
+      max-width: 90%;
+      &__avatar {
+        width: 120px;
+        height: 120px;
+        box-shadow: 0px 0px 20px rgba(155,155,155,.5);
+      }
+      hr {
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      h2 {
+        font-size: 0.94rem;
+      }
+    }
+    &__navigation__home {
+      a {
+        &:hover {
+        }
+      }
+      ul {
+        li {
+        }
+      }
+    }
+    &__navigation {
+      ul {
+        li {
+          a {
+            &:hover {
+            }
+          }
+        }
+      }
+    }
+    &__content {
+    }
+  }
+}
+
