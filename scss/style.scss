@@ -1,24 +1,24 @@
 /* Breakpoints */
 
 /* Small only */
-@media screen and (max-width: 39.9375em) {}
+//@media screen and (max-width: 39.9375em) {}
 
 /* Medium and up */
-@media screen and (min-width: 40em) {}
+//@media screen and (min-width: 40em) {}
 
 /* Medium only */
-@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+//@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
 
 /* Large and up */
-@media screen and (min-width: 64em) {}
+//@media screen and (min-width: 64em) {}
 
 /* Large only */
-@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
+//@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
 
 body {
   background: #1a1a1a;
   // font-family: "Montserrat", sans-serif;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0;
 }
 
@@ -39,7 +39,7 @@ body {
     content: "";
     display: inline-block;
     position: absolute;
-    z-index: 1; 
+    //z-index: 1; 
     width: 100%;
     height: 500px; // Height of the gradient
     background: linear-gradient(
@@ -54,15 +54,13 @@ body {
     right: -50px; // Same size as blur filter.
     bottom: 0;
     left: -50px; // Same size as blur filter.
+    background-image: url('../img/bg-eso-edge.png');
     //background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
-    z-index: 0;
+    //z-index: 1;
     filter: blur(80px);
     opacity: 0.5;
-  }
-  .blurParallaxBg__image__edge {
-    display: none;
   }
   .blurParallaxBg__image {
     // position, left, and transform center the image
@@ -71,71 +69,22 @@ body {
     transform: translateX(-50%);
     // Doesn't matter if using the Javascript scroll to fade.
     // opacity: 0.8; // Makes background image slightly transparent
-    z-index: 1;
+    //z-index: 1;
     max-height: 680px; // Same height as the background image
   }
   .blurParallaxBg__image-clip {
+    // Removing this because it doesn't work in Edge.
     // Masks the bottom part of the background image with a gradient.
+    /*
     -webkit-mask-image: linear-gradient(180deg, black 9%, transparent 80%);
     mask-image: linear-gradient(180deg, black 9%, transparent 80%);
+    */
+
     height: 680px; // Same height as the background image
     //height: 100vh;
   }
-  .shape {
-    display: none;
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    //margin-top: -220px; // Brush
-    margin-top: -212px;
-    margin-left: -150px;
-    width: 300px;
-    height: 300px;
-
-    /* Does not work in Edge
-    background-color: rgba(215,145,8,1.0);
-    -webkit-mask-image: url(http://zolton.org/img/brush-black.png);
-    mask-image: url(http://zolton.org/img/brush-black.png);
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    */
-
-    /* Works in Edge. */
-    background-color: transparent; 
-    background-image: url('../img/brush-white.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    
-    opacity: 0.65;
-  }
-
   // Edge Only
-  @supports (-ms-ime-align: auto) {
-    .blurParallaxBg__image {
-      display: none;
-    }
-    .blurParallaxBg__image__edge {
-      display: block;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1;
-      max-height: 680px;
-      opacity: 0.45;
-    }
-    /* Moved this code to general .shape above.
-    .shape {
-      background-color: transparent; 
-      background-image: url(http://zolton.org/img/brush-bfa-horde-edge.png);
-      background-size: contain;
-      background-repeat: no-repeat;
-      opacity: 0.65;
-    }
-    */
-  }
+  //@supports (-ms-ime-align: auto) {}
 }
 
 .layout {
@@ -156,8 +105,10 @@ body {
     max-width: 50%;
     margin-bottom: 80px;
     // margin-bottom: 0px;
-    font-family: 'Playfair Display', serif;
-    font-style: normal;
+    font-family: "Playfair Display", serif;
+    font-weight: 700; // Must be included for mobile devices.
+    font-style:italic; // Must be included for mobile devices.
+    //font-style: normal;
     text-shadow: 0 0 1px transparent, 0 1px 8px rgba(0, 0, 0, 0.8);
     text-align: center;
     &__avatar {
@@ -171,11 +122,10 @@ body {
       width: 180px;
       height: 180px;
       background-color: transparent;
-      background-image: url(../img/wow-pepe.jpg);
+      background-image: url('../img/wow-pepe.jpg');
       background-size: contain;
       background-repeat: no-repeat;
       border-radius: 200px;
-      z-index: 100;
       box-shadow: 0px 0px 40px rgba(155,155,155,0.5);
     }
     hr {
@@ -191,16 +141,16 @@ body {
       margin-bottom: -10px;
     }
     h1 {
-      font-weight: 100;
+      //font-weight: 100;
       font-size: 4.6rem;
-      font-style: normal;
+      //font-style: normal;
       margin: 0;
       padding: 0;
     }
     h2 {
       color: white;
       opacity: 0.7;
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       font-weight: 100;
       font-size: 1.2rem;
       line-height: 1.4em;
@@ -255,9 +205,8 @@ body {
     }
   }
   &__content {
-    display: none;
     background-color: rgba(0, 0, 255, 0.3);
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 100;
     font-style: normal;
     text-rendering: optimizeLegibility;
