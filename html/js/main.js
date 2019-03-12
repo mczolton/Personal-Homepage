@@ -4,18 +4,18 @@ window.bookmarkData = {
   "bookmarks": [
     {  "href": "https://www.primagames.com/games/elder-scrolls-online/guides/elder-scrolls-online-morrowind-eguide",
       "image": "img/bookmarks/TESO-Morrowind-01-HD.png",
-      "title": "The Elder Scrolls Online: Morrowind eGuide" 
+      "title": "Elder Scrolls Online: Morrowind eGuide"
     },
     {  "href": "https://www.primagames.com/games/fallout-76/guides/fallout-76-eguide",
       "image": "img/bookmarks/Fallout-76-05-HD.png",
       "title": "Fallout 76 eGuide" 
     },
     {  "href": "http://deltiasgaming.com/eso-stamina-nightblade-dps-build/",
-      "image": "",
+      "image": "img/bookmarks/TESO-02-HD-textless.png",
       "title": "ESO Stamina Nightblade DPS Build" 
     },
     {  "href": "http://eso-skills.com/",
-      "image": "",
+      "image": "img/bookmarks/TESO-02-HD-textless.png",
       "title": "ESO Skill Calculator" 
     }
   ]
@@ -34,6 +34,9 @@ $( document ).ready(function() {
     var bookmarkHtml = '';
     var bookmarkElement = document.getElementById("bookmarks");
     var bookmarks = window.bookmarkData.bookmarks;
+
+    // Sort bookmarks by title
+    bookmarks.sort((a, b) => a.title.localeCompare(b.title));
 
     // For each bookmark in bookmarks ...
     bookmarks.forEach(function(bookmark) {
