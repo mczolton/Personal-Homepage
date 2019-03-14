@@ -21,7 +21,7 @@ fi
 #######
 # PHP #
 #######
-apt-get install -y php libapache2-mod-php
+apt-get install -y php libapache2-mod-php php-mbstring php-xml
 
 #################
 # PHP Utilities #

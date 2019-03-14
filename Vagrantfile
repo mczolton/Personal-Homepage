@@ -75,9 +75,8 @@ Vagrant.configure("2") do |config|
   # Copy the user's .gitconfig. 
   config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
 
-  # Copy the custom .bash_profile and convert it to Unix line endings.
-  #config.vm.provision "file", source: ".profile", destination: ".profile"
-  #config.vm.provision "shell", inline: $convertProfileToUnix
+  # Ensure .profile uses Unix line endings.
+  config.vm.provision :shell, inline: $convertProfileToUnix, :run => 'always'
   
   # Call the provisioner shell script.
   config.vm.provision "shell", path: "bootstrap.sh"
@@ -92,10 +91,10 @@ end
 # Inline scripts
 
 # .profile needs to be converted to Unix line endings.  
-#$convertProfileToUnix = <<SCRIPT
-#apt-get install dos2unix
-#dos2unix .profile
-#SCRIPT
+$convertProfileToUnix = <<SCRIPT
+apt-get install dos2unix
+dos2unix /vagrant/.profile
+SCRIPT
 
 # Additional provisioning to be completed as the non-pivileged user.
 # Environment variables: https://stackoverflow.com/questions/24707986/create-linux-environment-variable-using-vagrant-provisioner
