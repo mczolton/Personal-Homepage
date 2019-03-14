@@ -69,6 +69,46 @@ Vagrant.configure("2") do |config|
   #   apt-get install -y apache2
   # SHELL
 
+  # Run apt-get update
+  config.vm.provision "shell", inline: "apt-get update"
+
+  # Copy the user's .gitconfig. 
+  config.vm.provision "file", source: "~/.gitconfig", destination: ".gitconfig"
+
+  # Copy the custom .bash_profile and convert it to Unix line endings.
+  #config.vm.provision "file", source: ".profile", destination: ".profile"
+  #config.vm.provision "shell", inline: $convertProfileToUnix
+  
   # Call the provisioner shell script.
   config.vm.provision "shell", path: "bootstrap.sh"
+
+  # Environment variables
+  config.vm.provision :shell, inline: "echo 'source /vagrant/.profile' > /etc/profile.d/vagrant-environment.sh", :run => 'always'
+
+  # Additional provisioning to be completed as the non-pivileged user.
+  #config.vm.provision "shell", inline: $installAsVagrantUser, privileged: false
 end
+
+# Inline scripts
+
+# .profile needs to be converted to Unix line endings.  
+#$convertProfileToUnix = <<SCRIPT
+#apt-get install dos2unix
+#dos2unix .profile
+#SCRIPT
+
+# Additional provisioning to be completed as the non-pivileged user.
+# Environment variables: https://stackoverflow.com/questions/24707986/create-linux-environment-variable-using-vagrant-provisioner
+#                      : https://github.com/hashicorp/vagrant/issues/7015
+#$installAsVagrantUser = <<SCRIPT
+#source ~/.profile && [ -z "$COMPOSER_HOME" ] && echo "export COMPOSER_HOME=~/.composer" >> ~/.profile
+#composer global require "laravel/lumen-installer"
+#composer global require "squizlabs/php_codesniffer=*"
+#composer global require "wimg/php-compatibility=*"
+#~/.composer/vendor/bin/phpcs --config-set installed_paths ~/.composer/vendor/wimg/php-compatibility
+#SCRIPT
+
+#$environmentVariables = <<SCRIPT
+#export COMPOSER_HOME=$HOME/.composer
+#export PATH=$HOME/bin:$HOME/.local/bin:$COMPOSER_HOME/vendor/bin:$PATH
+#SCRIPT
